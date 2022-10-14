@@ -1,6 +1,6 @@
-# Jumper
+# Jumper overview
 ___
-Play jumper description
+Jumper is a game in which the player seeks to solve a puzzle by guessing the letters of a secret word one at a time.  One line of the parachute is elliminated for each wrong guess.  If the player guesses the secret word with less than 4 incorrect guesses they win.  If the player gets 4 incorrect guesses their parachute is elliminated and they loose.
 
 ## Getting Started
 ___
