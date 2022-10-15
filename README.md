@@ -52,7 +52,7 @@ ___
 
 ### parachute (Alex)
 - __init__
-    - self._parachute
+    - ._parachute_state
 - self.display
     - (self, wrong_guesses)
     - display parachute
