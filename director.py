@@ -70,7 +70,7 @@ class Director:
             self(Director): An instance of Director
         '''
         #reads player input from terminal
-        guess = self._terminal.read_text("\nGuess a letter: ")
+        guess = self._terminal_service.read_text("\nGuess a letter: ")
         self._puzzle.guess_compare(guess)
         
     def _do_updates(self):
@@ -93,14 +93,14 @@ class Director:
         #set local variable equal to display parachute from Parachute   
         display_parachute = self._parachute.display(wrong_guesses) 
         #output parachute to the terminal
-        self._terminal.write_text(display_parachute)
+        self._terminal_service.write_text(display_parachute)
         #if puzzle incorret guesses is greater than 4 player loses
         if self._puzzle.incorrect_guesses > 4:
             #end loop for is_playing if incorrect guesses greater than 4
             self._is_playing = False
-            play_again = self.terminal.read_text("Your lifeline is gone." 
+            play_again = self.terminal_service.read_text("Your lifeline is gone." 
                 "Do you want to play again? (y or n): ")
             if play_again.lower() == "n":
-                self._terminal.write_text("\nThanks for playing! Better luck next time!")
+                self._terminal_service.write_text("\nThanks for playing! Better luck next time!")
             else:
                 self.play_again = True
