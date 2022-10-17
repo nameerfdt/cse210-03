@@ -23,7 +23,12 @@ class Director:
         self._terminal_service = TerminalService()
         self._is_playing = True
 
-    def welcome(self):
+    def start_game(self):
+        '''Starts the jumper game by running the main game loop.
+        
+        Args:
+            self (Director): an instance of Director.
+        '''
         #variable for welcome message
         welcome = ("\n         »»————-★————-««"
                  "\n ╔═════════════════════════════╗"
@@ -31,11 +36,9 @@ class Director:
                  "\n ╚═════════════════════════════╝"
                  "\n  ✩｡:*•.─────  ❁ ❁  ─────.•*:｡✩"
                  "\n"
-                 "\nDesigned by: Alex, Joshua, Tracy, and Mark")
-        #call the terminal_service class write_text method to display welcome to terminal         
-        self._terminal_service.write_text(welcome)
+                 "\nDesigned by: Alex, Joshua, Tracy, and Mark"
+                 "\n")
 
-    def display_rules(self):
         #variable to display game rules
         rules = ("\nGame Rules:"
                  "\n"
@@ -45,16 +48,12 @@ class Director:
                  "\nIf the guess is incorrect, a line is cut on the player's parachute."
                  "\nIf the puzzle is solved the game is over."
                  "\nIf the player has no more parchute the game is over."
-                 "\nPlayer can choose if they want to play again.")
-        #call the terminal_service class write_text method to display rules to terminal
+                 "\nPlayer can choose if they want to play again."
+                 "\n")
+        #call the terminal_service class write_text method to display welcome and rules
+        self._terminal_service.write_text(welcome)        
         self._terminal_service.write_text(rules)
 
-    def start_game(self):
-        '''Starts the jumper game by running the main game loop.
-        
-        Args:
-            self (Director): an instance of Director.
-        '''
         #main game loop until number of guesses is exceeded
         while self._is_playing:
             self._get_inputs()
