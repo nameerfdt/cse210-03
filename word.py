@@ -77,6 +77,10 @@ class Word:
         # Get a word from the list using the random number.
         random_word = self.word_list[index]
 
+        # Call split word.
+        self.split_word(random_word)
+
+    def split_word(random_word): # Split the random word into a letter list.
         # Separate the random word into a list of letters.
         letter_list = list(random_word)
 
