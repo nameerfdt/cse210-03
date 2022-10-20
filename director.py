@@ -22,6 +22,10 @@ class Director:
         self._parachute = Parachute()
         self._terminal_service = TerminalService()
         self._is_playing = True
+        self._incorrect_guesses = 0
+        self._correct_guesses = 0
+        self._current_game = True
+        self._game_won = False
 
     def start_game(self):
         '''Starts the jumper game by running the main game loop.
@@ -50,16 +54,19 @@ class Director:
                  "\nIf the player has no more parchute the game is over."
                  "\nPlayer can choose if they want to play again."
                  "\n")
+
         #call the terminal_service class write_text method to display welcome and rules
         self._terminal_service.write_text(welcome)        
         self._terminal_service.write_text(rules)
 
         #main game loop until number of guesses is exceeded
         while self._is_playing:
-            self._get_inputs()
-            self._do_updates()
-            self._do_outputs()
-            self._play_again = False
+            self._puzzle.store_word()
+            while self._current_game:
+                self._get_inputs()
+                self._do_updates()
+                self._do_outputs()
+
 
     def _get_inputs(self):
         '''Get the player's input and returns it to puzzle
@@ -68,8 +75,8 @@ class Director:
         Args:
             self(Director): An instance of Director
         '''
-        #reads player input from terminal
-        guess = self._terminal_service.read_text("\nGuess a letter: ")
+        #reads player input from terminal and sends to puzzle
+        guess = self._terminal_service.read_text("\nGuess a letter (a-z): ")
         self._puzzle.guess_compare(guess)
         
     def _do_updates(self):
@@ -80,26 +87,35 @@ class Director:
         '''
         #self.get_incorrect returns self._incorrect_guesses to director
         #self.get_correct returns self._correct_guessed to director
-        self._puzzle.get_incorrect(self._puzzle)
-        self._puzzle.get_correct(self._puzzle)
+        self._correct_guesses = self._puzzle.get_correct()
+        self._incorrect_guesses = self._puzzle.get_incorrect()
+        
 
     def _do_outputs(self):
         '''Shows parachute status
         
         Args:
             self (Director): An instance of Director
-        '''   
-        #set local variable equal to display parachute from Parachute   
-        display_parachute = self._parachute.display(wrong_guesses) 
+        '''     
+     
         #output parachute to the terminal
-        self._terminal_service.write_text(display_parachute)
+        self._terminal_service.write_text(" ".join(self._correct_guesses))
+        self._terminal_service.write_text(self._parachute.display(self._incorret_guesses))
+        
+        if "_" not in self._correct_guesses:
+            self._game_won = True
+
         #if puzzle incorret guesses is greater than 4 player loses
-        if self._puzzle.incorrect_guesses > 4:
-            #end loop for is_playing if incorrect guesses greater than 4
-            self._is_playing = False
-            play_again = self.terminal_service.read_text("Your lifeline is gone." 
-                "Do you want to play again? (y or n): ")
+        if self._incorrect_guesses > 4:
+            #end loop for is_playing if incorrect guesses greater than 4            
+            self._current_game = False
+            play_again = self.terminal_service.read_text("\nYour lifeline is gone. Do you want to play again? (y or n): ")
             if play_again.lower() == "n":
+                self._is_playing = False
                 self._terminal_service.write_text("\nThanks for playing! Better luck next time!")
-            else:
-                self.play_again = True
+        elif self._game_won:
+            self._current_game = False
+            play_again = self.terminal_service.read_text("\nCongrats! You won! Do you want to play again? (y or n): ")
+            if play_again.lower() == "n":
+                self._is_playing = False
+                self._terminal_service.write_text("\nThanks for playing! It's been fun!")
