@@ -37,8 +37,6 @@ class Puzzle:
             current_digit += 1
         if total_incorrect_checks == len(self._secret_word):
             self._incorrect_guesses += 1
-            
-        
     
     def get_incorrect(self):
         """Returns Number Incorrect Guesses to a Director"""
