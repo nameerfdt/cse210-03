@@ -1,3 +1,4 @@
+from difflib import diff_bytes
 import random
 
 class Word:
@@ -5,12 +6,12 @@ class Word:
     # The responsibility of Word is to generate a random word for the player to guess.
 
     # Word list for the single difficulty program containing words with 4 or 5 letters.
-    word_list = ["AREA", "ABYSS", "BABY", "BALMY", "CASH", "CAPER", "DEAL", "DEBUT",
-    "EDGE", "EDIFY", "FISH", "FEMUR", "GIRL", "GLOVE", "HELP", "HOVER", "IDEA", "IDIOT",
-    "JACK", "JEWEL", "KIND", "KINGS", "LAND", "LEVER", "MISS", "MARRY", "NAME", "NINJA",
-    "OVAL", "ORGAN", "POST", "PSALM", "QUIZ", "QUEST", "ROAD", "ROGUE", "SIZE", "SCENE",
-    "TOUR", "TITHE", "USER", "URBAN", "VARY", "VIRUS", "WIFE", "WAGON", "XYST", "XENON",
-    "YEAR", "YEAST", "ZEAL", "ZONES"]
+    # word_list = ["AREA", "ABYSS", "BABY", "BALMY", "CASH", "CAPER", "DEAL", "DEBUT",
+    # "EDGE", "EDIFY", "FISH", "FEMUR", "GIRL", "GLOVE", "HELP", "HOVER", "IDEA", "IDIOT",
+    # "JACK", "JEWEL", "KIND", "KINGS", "LAND", "LEVER", "MISS", "MARRY", "NAME", "NINJA",
+    # "OVAL", "ORGAN", "POST", "PSALM", "QUIZ", "QUEST", "ROAD", "ROGUE", "SIZE", "SCENE",
+    # "TOUR", "TITHE", "USER", "URBAN", "VARY", "VIRUS", "WIFE", "WAGON", "XYST", "XENON",
+    # "YEAR", "YEAST", "ZEAL", "ZONES"]
 
     # Word list for the easy difficulty containing words with 3 or 4 letters.
     easy_list = ["AIR", "AIM", "BED", "BOY", "COB", "COW", "DAD", "DOG", "EGG", "END",
@@ -67,7 +68,7 @@ class Word:
     def __init__(self):
         pass
 
-    def get_word(self): # Get a random word from the word list.
+    def get_word(self, difficulty): # Get a random word from the word list.
         # Get the length of the word list.
         length = len(self.word_list)
 
@@ -75,7 +76,14 @@ class Word:
         index = (random.randrange(0, (length - 1)))
 
         # Get a word from the list using the random number.
-        random_word = self.word_list[index]
+        # random_word = self.word_list[index]
+
+        if difficulty == "1":
+            random_word = self.easy_list[index]
+        elif difficulty == "2":
+            random_word = self.medium_list[index]
+        elif difficulty == "3":
+            random_word = self.hard_list[index]
 
         # Call split word.
         self.split_word(random_word)
