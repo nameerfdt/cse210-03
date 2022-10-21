@@ -70,7 +70,12 @@ class Word:
 
     def get_word(self, difficulty): # Get a random word from the word list.
         # Get the length of the word list.
-        length = len(self.word_list)
+        if difficulty == "1":
+            length = len(self.easy_list)
+        elif difficulty == "2":
+            length = len(self.medium_list)
+        elif difficulty == "3":
+            length = len(self.hard_list)
 
         # Generate a random number within range.
         index = (random.randrange(0, (length - 1)))
@@ -86,11 +91,13 @@ class Word:
             random_word = self.hard_list[index]
 
         # Call split word.
-        self.split_word(random_word)
+        # self.split_word(random_word)
 
-    def split_word(random_word): # Split the random word into a letter list.
-        # Separate the random word into a list of letters.
         letter_list = list(random_word)
 
         # Return list of letters.
         return letter_list
+
+    # def split_word(random_word): # Split the random word into a letter list.
+    #     # Separate the random word into a list of letters.
+        

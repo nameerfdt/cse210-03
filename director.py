@@ -61,7 +61,13 @@ class Director:
 
         #main game loop until number of guesses is exceeded
         while self._is_playing:
+            self._game_won = False
+            self._current_game = True
             self._puzzle.store_word(self._terminal_service.read_number("\nWhat difficulty level would you like. \n1) Easy \n2) Medium \n3) Hard \n Please enter a number: "))
+            self._correct_guesses = self._puzzle.get_correct()
+            self._incorrect_guesses = self._puzzle.get_incorrect()
+            self._terminal_service.write_text(" ".join(self._correct_guesses))
+            self._terminal_service.write_text("\n" + self._parachute.display(self._incorrect_guesses))
             while self._current_game:
                 self._get_inputs()
                 self._do_updates()
@@ -100,7 +106,7 @@ class Director:
      
         #output parachute to the terminal
         self._terminal_service.write_text(" ".join(self._correct_guesses))
-        self._terminal_service.write_text(self._parachute.display(self._incorret_guesses))
+        self._terminal_service.write_text("\n" + self._parachute.display(self._incorrect_guesses))
         
         if "_" not in self._correct_guesses:
             self._game_won = True
@@ -109,13 +115,13 @@ class Director:
         if self._incorrect_guesses > 4:
             #end loop for is_playing if incorrect guesses greater than 4            
             self._current_game = False
-            play_again = self.terminal_service.read_text("\nYour lifeline is gone. Do you want to play again? (y or n): ")
+            play_again = self._terminal_service.read_text("\nYour lifeline is gone. Do you want to play again? (y or n): ")
             if play_again.lower() == "n":
                 self._is_playing = False
                 self._terminal_service.write_text("\nThanks for playing! Better luck next time!")
         elif self._game_won:
             self._current_game = False
-            play_again = self.terminal_service.read_text("\nCongrats! You won! Do you want to play again? (y or n): ")
+            play_again = self._terminal_service.read_text("\nCongrats! You won! Do you want to play again? (y or n): ")
             if play_again.lower() == "n":
                 self._is_playing = False
                 self._terminal_service.write_text("\nThanks for playing! It's been fun!")

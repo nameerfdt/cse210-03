@@ -34,6 +34,8 @@ class Parachute:
         if wrong_guesses > 4:
             wrong_guesses = 4
             self._parachute_state[4] = "  x"
+        else:
+            self._parachute_state[4] = "  O"
         return "\n".join(self._parachute_state[wrong_guesses:])
 
 

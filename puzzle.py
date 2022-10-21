@@ -14,6 +14,8 @@ class Puzzle:
         """Stores a word in self._secret_word for use
         with the compare function. Has a commented option for 
         dificulty selection if needed"""
+        self._incorrect_guesses = 0
+        self._correct_guessed = []
         self._secret_word = self._word.get_word(difficulty)
         for i in self._secret_word:
             self._correct_guessed.append("_")
@@ -28,8 +30,8 @@ class Puzzle:
         current_digit = 0
         total_incorrect_checks = 0
         for letter in self._secret_word:
-            if guess == letter:
-                self._correct_guessed[current_digit] = letter
+            if guess.upper() == letter.upper():
+                self._correct_guessed[current_digit] = letter.upper()
             else:
                 total_incorrect_checks += 1
             current_digit += 1
