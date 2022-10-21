@@ -28,7 +28,7 @@ class Parachute:
         """Displays the parachute based on the number of wrong guesses
 
                Args:
-                   self (Parachute): An instance of Deck.
+                   self (Parachute): An instance of parachute.
                    wrong_guesses (int): The number of wrong_guesses. A number over 4 will be changed into 4.
                """
         if wrong_guesses > 4:
