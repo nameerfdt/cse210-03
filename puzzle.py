@@ -10,15 +10,13 @@ class Puzzle:
         self._incorrect_guesses = 0
         self._correct_guessed =[]
     
-    def store_word(self):
+    def store_word(self, difficulty):
         """Stores a word in self._secret_word for use
         with the compare function. Has a commented option for 
         dificulty selection if needed"""
-        self._secret_word = self._word.get_word()
+        self._secret_word = self._word.get_word(difficulty)
         for i in self._secret_word:
             self._correct_guessed.append("_")
-
-        """self._secret_word = self._word.get_word(difficulty)"""
 
     def guess_compare(self, guess):
         """Compares guess to letters in word (list). If the letter
