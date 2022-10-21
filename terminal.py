@@ -17,7 +17,7 @@ class TerminalService:
         """
         return input(prompt)
 
-#    def read_number(self, prompt):
+    def read_number(self, prompt):
         """Gets letter input from the terminal. Directs the user with the given prompt.
 
         Args: 
