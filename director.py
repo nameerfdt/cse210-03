@@ -61,7 +61,7 @@ class Director:
 
         #main game loop until number of guesses is exceeded
         while self._is_playing:
-            self._puzzle.store_word()
+            self._puzzle.store_word(self._terminal_service.read_number("\nWhat difficulty level would you like. \n1) Easy \n2) Medium \n3) Hard \n Please enter a number: "))
             while self._current_game:
                 self._get_inputs()
                 self._do_updates()
